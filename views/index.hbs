@@ -3,8 +3,8 @@
     <head>
         <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css"
             rel="stylesheet">
-        <link rel="shortcut icon" href="../newsbreak.jpg" type="image/x-icon">
-        <link rel="stylesheet" href="./style.css">
+        <link rel="shortcut icon" href="../static/newsbreak.jpg" type="image/x-icon">
+        {{!-- <link rel="stylesheet" href="../static/style.css"> --}}
         <meta charset="UTF-8">
         <link rel="preconnect" href="https://fonts.gstatic.com">
         <link
@@ -13,7 +13,126 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Welcome to my newsee</title>
+
     </head>
+    <style>
+        *{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+body{
+    background-image: url('../static/mdImage.jpg');
+}
+a{
+    color: white !important;
+    stroke: white ;
+    font-weight: 500;
+    font-family: Arial, Helvetica, sans-serif;
+}
+a:hover{
+    text-decoration: underline !important;
+}
+span {
+    font-size: 35px !important;
+    color: rgb(255, 255, 255) !important;
+    font-family: 'Ubuntu Condensed', sans-serif !important;
+}
+.welcome h1{
+    font-family: 'Ubuntu Condensed', sans-serif !important;
+    font-size:40px;
+    padding-top: 30px !important;
+}
+.navfixed{
+
+    position: fixed ;
+    top: -1rem;
+    width: 100%;
+    /* top: 2em ; */
+    background-color: rgb(223, 0, 130);
+}
+.addinsertclass{
+    /* padding: 20px; */
+    border: 1px solid rgb(194, 54, 54);
+    height:37em;
+ 
+    margin-top: -100px;
+}
+
+.image_container{
+display: flex;
+flex-direction: row;
+/* width: 100%; */
+flex-wrap: wrap;
+}
+.img_continer{
+    font-size: 30px;
+    display: block;
+    width: 100%;
+    height: 340px !important;
+    height: 100vh;
+}
+.imageback{
+    height: 25em;
+    width: 100%;
+}
+/* fooetr */
+footer{
+    background-color: rgb(95, 102, 95);
+    width: 100%;
+    position: fixed;
+    z-index: 1;
+   
+    bottom: -5em;
+    height: 20vh;
+}
+.footer_div{
+    margin-top:-20px ;
+}
+
+@media screen and (max-width:430px) {
+    .welcome h1{
+        position: relative;
+        top: 2em;z-index: -1;
+        text-align: center;
+        width: 150%;
+    }
+    .addinsertclass{
+        height:44em; 
+        width: 180%;
+        margin-right: 10px;
+        text-align: center;
+    }
+    .image_container{
+        z-index: -1;
+        width: 103%;
+    position: relative;
+    right: 4.5em;
+
+    }
+}
+@media screen and (max-width:373px) {
+    .welcome h1{
+        position: relative;
+        top: 2em;z-index: -1;
+        text-align: center;
+        width: 150%;
+    }
+    .addinsertclass{
+        height:50em; 
+        width: 180%;
+        margin-right: 10px;
+        text-align: center;
+    }
+    .image_container{
+        z-index: -1;
+        width: 105%;
+    position: relative;
+    right: 4.5em;
+
+    }
+}
+    </style>
     <body>
         <div class="container">
             <header class="text-gray-600 body-font bg-pink-500">
@@ -30,7 +149,7 @@
                             <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2
                                 12l10 5 10-5"></path>
                         </svg> -->
-                        <img src="../newsee.jpg" alt="" width="40px"
+                        <img src="../static/newsee.jpg"  alt="" width="40px"
                             style="font-size: 200px;">
                         <span class="ml-3 text-xl font-bold font-sans
                             text-black cursor-pointer">Newsee</span>
@@ -64,27 +183,27 @@
         <!-- add image stlyle -->
 
         <section class="text-gray-600 body-font">
+                {{# each data1}}
             <div class="container px-5 py-7 mx-auto image_container">
-                <!-- <div class="flex flex-wrap flex-row m-4">
+             <div class="flex flex-wrap flex-row m-4">
                     <div class="p-4 md:w-1/1">
                         <div class="h-1\/2 border-2 border-gray-200
                             border-opacity-60 rounded-lg overflow-hidden
                             addinsertclass">
-                            <img class="lg:h-48 md:h-36 w-full object-cover
+                            
+                            <img src={{this.urlToImage}} class="imageback" class="lg:h-48 md:h-36 w-full object-cover
                                 object-center"
                                 src=""
                                 alt="blog">
                             <div class="p-6">
                                 <h2 class="tracking-widest text-xs title-font
-                                    font-medium mb-1 text-white">CATEGORY</h2>
+                                    font-medium mb-1 text-white">{{this.publishedAt}}</h2>
+                                    {{!-- CATEGORY --}}
                                 <h1 class="title-font text-lg font-medium
-                                    text-white mb-3">The Catalyzer</h1>
-                                <p class="leading-relaxed mb-3 text-yellow-400">Photo
-                                    booth fam
-                                    kinfolk cold-pressed sriracha leggings
-                                    jianbing microdosing tousled waistcoat.</p>
+                                    text-white mb-3">{{this.title}}</h1>
+                                <p class="leading-relaxed mb-3 text-yellow-400">{{this.description}}.</p>
                                 <div class="flex items-center flex-wrap">
-                                    <a class="text-red-500 inline-flex
+                                    <a href={{this.url}} target="_Blank" class="text-red-500 inline-flex
                                         items-center md:mb-2 lg:mb-0
                                         cursor-pointer">Learn More
                                         <svg class="w-4 h-4 ml-2" viewBox="0 0
@@ -101,9 +220,11 @@
                             </div>
                         </div>
                     </div>
-                </div> -->
+                
             </div>
-
+            </div>
+            {{/each}}
+        </section>
             <!-- footer -->
 
             <footer class="text-gray-600 body-font">
@@ -175,7 +296,10 @@
                         </a>
                     </span>
                 </div>
+
+             
             </footer>
         </body>
-        <script src="./api.js"></script>
+        {{!-- <script src="http://localhost:2000/socket.io/socket.io.js"></script> --}}
+        {{!-- <script src="../static/api.js"></script> --}}
     </html>
